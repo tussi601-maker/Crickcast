@@ -124,6 +124,12 @@ header{
   margin-top:70px;
 }
 
+.video-container iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
 .section-box{
   width:92%;
   margin:18px auto;
@@ -214,7 +220,11 @@ header{
 </header>
 
 <div class="video-container">
-  <video id="video" controls autoplay style="width:100%; height:100%;"></video>
+  <iframe
+    src="https://crickly.pages.dev/player1?id=TH8P5CwConPre5TxfThe"
+    allowfullscreen
+    allow="autoplay; encrypted-media; fullscreen; picture-in-picture">
+  </iframe>
 </div>
 
 <div class="section-box">
@@ -240,31 +250,10 @@ header{
   </a>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.compiled.js"></script>
-
 <script>
 function closePopup(){
   document.getElementById('popup').style.display='none';
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-
-  const video = document.getElementById('video');
-  const player = new shaka.Player(video);
-
-  player.configure({
-    drm: {
-      clearKeys: {
-        "288380ca4cef9ad3f27a92a08e9bb8b": "9f18d26291d9230833501f7f822f6875"
-      }
-    }
-  });
-
-  player.load("https://qw.live.pv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/fb6jy4pxts/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd")
-  .then(() => console.log("Video loaded"))
-  .catch(e => console.error("Error:", e));
-
-});
 </script>
 
 </body>

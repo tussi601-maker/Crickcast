@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CRICKET RASH</title>
 
 <style>
@@ -117,68 +118,6 @@ border:0;
 display:block;
 }
 
-.popup-bg{
-display:none;
-position:fixed;
-inset:0;
-z-index:99999;
-background:rgba(0,0,0,.78);
-align-items:center;
-justify-content:center;
-padding:20px;
-}
-
-.popup{
-width:100%;
-max-width:360px;
-background:#151c24;
-border:1px solid #29343d;
-border-radius:13px;
-padding:24px;
-text-align:center;
-position:relative;
-}
-
-.close{
-position:absolute;
-right:15px;
-top:8px;
-color:#aaa;
-font-size:28px;
-cursor:pointer;
-}
-
-.popup-logo{
-width:100px;
-height:100px;
-background:#fff;
-border-radius:10px;
-object-fit:contain;
-display:block;
-margin:5px auto 15px;
-}
-
-.popup-name{
-font-size:21px;
-font-weight:bold;
-margin-bottom:18px;
-}
-
-.popup-btn{
-display:block;
-width:100%;
-padding:12px;
-margin-top:10px;
-border:0;
-border-radius:7px;
-background:#1688d8;
-color:#fff;
-text-decoration:none;
-font-size:13px;
-font-weight:bold;
-cursor:pointer;
-}
-
 .footer{
 text-align:center;
 color:#59636d;
@@ -187,6 +126,7 @@ margin-top:30px;
 }
 
 @media(max-width:500px){
+
 .channel{
 min-height:140px;
 padding:16px;
@@ -206,6 +146,7 @@ font-size:16px;
 padding:11px 13px;
 font-size:11px;
 }
+
 }
 </style>
 </head>
@@ -238,6 +179,8 @@ WATCH
 </div>
 
 
+<!-- PLAYER -->
+
 <div class="player-container" id="playerContainer">
 
 <div class="player">
@@ -261,53 +204,31 @@ Live Cricket
 </div>
 
 
-<!-- POPUP -->
-
-<div class="popup-bg" id="popupBg">
-
-<div class="popup">
-
-<div class="close" id="closeButton">×</div>
-
-<img
-class="popup-logo"
-src="https://i.ibb.co/TD2HrLv5/IMG-20261026-200738-475.jpg"
-alt="CRICKET RASH">
-
-<div class="popup-name">
-CRICKET RASH
-</div>
-
-<a
-class="popup-btn"
-href="https://t.me/cricket_raash"
-target="_blank"
-rel="noopener">
-OPEN CHANNEL
-</a>
-
-<button
-class="popup-btn"
-id="watchLiveButton">
-WATCH LIVE
-</button>
-
-</div>
-
-</div>
-
-
 <script>
 
-const popupBg = document.getElementById("popupBg");
-const watchButton = document.getElementById("watchButton");
-const watchLiveButton = document.getElementById("watchLiveButton");
-const closeButton = document.getElementById("closeButton");
-const playerContainer = document.getElementById("playerContainer");
+const watchButton =
+document.getElementById("watchButton");
+
+const playerContainer =
+document.getElementById("playerContainer");
+
 
 watchButton.addEventListener("click", function(){
-popupBg.style.display = "flex";
+
+playerContainer.style.display = "block";
+
+setTimeout(function(){
+
+playerContainer.scrollIntoView({
+behavior:"smooth",
+block:"start"
 });
 
-watchLiveButton.addEventListener("click", function(){
-popup
+},100);
+
+});
+
+</script>
+
+</body>
+</html>

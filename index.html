@@ -108,23 +108,13 @@ border:1px solid #202b35;
 .player{
 width:100%;
 aspect-ratio:16/9;
-background:#000;
 }
 
-.player video{
+.player iframe{
 width:100%;
 height:100%;
+border:0;
 display:block;
-background:#000;
-object-fit:contain;
-}
-
-.player-message{
-display:none;
-padding:20px;
-text-align:center;
-color:#aaa;
-font-size:13px;
 }
 
 .popup-bg{
@@ -197,7 +187,6 @@ margin-top:30px;
 }
 
 @media(max-width:500px){
-
 .channel{
 min-height:140px;
 padding:16px;
@@ -217,7 +206,6 @@ font-size:16px;
 padding:11px 13px;
 font-size:11px;
 }
-
 }
 </style>
 </head>
@@ -250,22 +238,16 @@ WATCH
 </div>
 
 
-<!-- PLAYER -->
-
 <div class="player-container" id="playerContainer">
 
 <div class="player">
 
-<video
-id="videoPlayer"
-controls
-playsinline
-webkit-playsinline>
-</video>
-
-<div class="player-message" id="playerMessage">
-Unable to load the live stream.
-</div>
+<iframe
+id="playerFrame"
+src="https://sonucdn-v5.pages.dev/star?id=STEN3"
+allow="autoplay; fullscreen"
+allowfullscreen>
+</iframe>
 
 </div>
 
@@ -315,139 +297,17 @@ WATCH LIVE
 </div>
 
 
-<!-- HLS.JS -->
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 <script>
-
-const STREAM_URL =
-"https://sonucdn-v5.pages.dev/star?id=STEN3";
 
 const popupBg = document.getElementById("popupBg");
 const watchButton = document.getElementById("watchButton");
 const watchLiveButton = document.getElementById("watchLiveButton");
 const closeButton = document.getElementById("closeButton");
 const playerContainer = document.getElementById("playerContainer");
-const videoPlayer = document.getElementById("videoPlayer");
-const playerMessage = document.getElementById("playerMessage");
-
-let hls = null;
-
-
-/* OPEN POPUP */
 
 watchButton.addEventListener("click", function(){
-
 popupBg.style.display = "flex";
-
 });
-
-
-/* START PLAYER */
 
 watchLiveButton.addEventListener("click", function(){
-
-popupBg.style.display = "none";
-
-playerContainer.style.display = "block";
-
-loadStream();
-
-setTimeout(function(){
-
-playerContainer.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-},100);
-
-});
-
-
-/* LOAD HLS STREAM */
-
-function loadStream(){
-
-playerMessage.style.display = "none";
-
-
-if(videoPlayer.canPlayType("application/vnd.apple.mpegurl")){
-
-videoPlayer.src = STREAM_URL;
-
-videoPlayer.play().catch(function(){});
-
-return;
-
-}
-
-
-if(Hls.isSupported()){
-
-if(hls){
-hls.destroy();
-}
-
-hls = new Hls({
-enableWorker:true,
-lowLatencyMode:true
-});
-
-hls.loadSource(STREAM_URL);
-
-hls.attachMedia(videoPlayer);
-
-hls.on(Hls.Events.MANIFEST_PARSED,function(){
-
-videoPlayer.play().catch(function(){});
-
-});
-
-hls.on(Hls.Events.ERROR,function(event,data){
-
-if(data.fatal){
-
-console.log("HLS Error:",data);
-
-playerMessage.style.display = "block";
-
-}
-
-});
-
-}else{
-
-playerMessage.style.display = "block";
-
-}
-
-}
-
-
-/* CLOSE POPUP */
-
-closeButton.addEventListener("click", function(){
-
-popupBg.style.display = "none";
-
-});
-
-
-/* CLICK OUTSIDE POPUP */
-
-popupBg.addEventListener("click", function(event){
-
-if(event.target === popupBg){
-
-popupBg.style.display = "none";
-
-}
-
-});
-
-</script>
-
-</body>
-</html>
+popup

@@ -3,254 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cricket Live</title>
+<title>CRICKET RASH</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+html,body{
+margin:0;
+padding:0;
+background:#090d12;
+color:#fff;
+font-family:Arial,sans-serif;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    background: #090d12;
-    color: #fff;
-    font-family: Arial, sans-serif;
+.topbar{
+height:55px;
+display:flex;
+align-items:center;
+padding:0 15px;
+background:#10161d;
+border-bottom:1px solid #202a34;
 }
 
-/* ==============================
-   CHANNEL SETTINGS
-   SIRF YE 4 CHEEZE CHANGE KARO
-   ============================== */
-
-const_dummy {
-    display: none;
+.topbar-title{
+font-size:16px;
+font-weight:bold;
 }
 
-/* ============================== */
-
-.topbar {
-    height: 55px;
-    display: flex;
-    align-items: center;
-    padding: 0 13px;
-    background: #10161d;
-    border-bottom: 1px solid #202a34;
+.page{
+width:100%;
+max-width:900px;
+margin:auto;
+padding:28px 18px;
 }
 
-.topbar-title {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .2px;
+.channel{
+width:100%;
+min-height:140px;
+background:#111820;
+border:1px solid #202b35;
+border-radius:10px;
+display:flex;
+align-items:center;
+padding:18px;
+gap:16px;
 }
 
-.page {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px 10px;
+.logo-box{
+width:120px;
+height:110px;
+flex-shrink:0;
+background:#fff;
+border-radius:9px;
+overflow:hidden;
 }
 
-/* Channel */
-
-.channel {
-    width: 100%;
-    min-height: 100px;
-    background: #111820;
-    border: 1px solid #202b35;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    gap: 12px;
+.logo-box img{
+width:100%;
+height:100%;
+object-fit:contain;
 }
 
-/* Logo */
-
-.logo-box {
-    width: 82px;
-    height: 76px;
-    flex: 0 0 82px;
-    border-radius: 6px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.channel-info{
+flex:1;
+min-width:0;
 }
 
-.logo-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+.channel-name{
+font-size:19px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
-/* Info */
-
-.channel-info {
-    min-width: 0;
-    flex: 1;
+.live{
+display:inline-block;
+background:#e53935;
+padding:5px 9px;
+border-radius:4px;
+font-size:11px;
+font-weight:bold;
 }
 
-.channel-name {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 7px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.watch-btn{
+border:0;
+background:#1688d8;
+color:#fff;
+padding:13px 19px;
+border-radius:6px;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.live {
-    display: inline-block;
-    background: #e53935;
-    color: #fff;
-    font-size: 9px;
-    font-weight: bold;
-    padding: 3px 6px;
-    border-radius: 3px;
+.player-container{
+display:none;
+width:100%;
+margin-top:20px;
+background:#000;
+border-radius:10px;
+overflow:hidden;
+border:1px solid #202b35;
 }
 
-/* Watch button */
-
-.watch-btn {
-    border: 0;
-    background: #1688d8;
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 9px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    flex-shrink: 0;
+.player{
+width:100%;
+aspect-ratio:16/9;
 }
 
-.watch-btn:active {
-    transform: scale(.97);
+.player iframe{
+width:100%;
+height:100%;
+border:0;
+display:block;
 }
 
-/* Player */
-
-.player-container {
-    display: none;
-    width: 100%;
-    margin-top: 18px;
-    background: #000;
-    border-radius: 7px;
-    overflow: hidden;
-    border: 1px solid #202b35;
+.popup-bg{
+display:none;
+position:fixed;
+inset:0;
+z-index:99999;
+background:rgba(0,0,0,.78);
+align-items:center;
+justify-content:center;
+padding:20px;
 }
 
-.player {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
+.popup{
+width:100%;
+max-width:360px;
+background:#151c24;
+border:1px solid #29343d;
+border-radius:13px;
+padding:24px;
+text-align:center;
+position:relative;
 }
 
-.player iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border: 0;
+.close{
+position:absolute;
+right:15px;
+top:8px;
+color:#aaa;
+font-size:28px;
+cursor:pointer;
 }
 
-/* Popup background */
-
-.popup-bg {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(0,0,0,.75);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+.popup-logo{
+width:100px;
+height:100px;
+background:#fff;
+border-radius:10px;
+object-fit:contain;
+display:block;
+margin:5px auto 15px;
 }
 
-/* Popup */
-
-.popup {
-    width: 100%;
-    max-width: 350px;
-    background: #151c24;
-    border: 1px solid #29343d;
-    border-radius: 12px;
-    padding: 22px;
-    text-align: center;
-    position: relative;
+.popup-name{
+font-size:21px;
+font-weight:bold;
+margin-bottom:18px;
 }
 
-.close {
-    position: absolute;
-    right: 14px;
-    top: 9px;
-    color: #aaa;
-    font-size: 25px;
-    cursor: pointer;
+.popup-btn{
+display:block;
+width:100%;
+padding:12px;
+margin-top:10px;
+border:0;
+border-radius:7px;
+background:#1688d8;
+color:#fff;
+text-decoration:none;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.popup-logo {
-    width: 90px;
-    height: 90px;
-    background: #fff;
-    border-radius: 10px;
-    object-fit: contain;
-    display: block;
-    margin: 10px auto 15px;
+.footer{
+text-align:center;
+color:#59636d;
+font-size:11px;
+margin-top:30px;
 }
 
-.popup-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 18px;
+@media(max-width:500px){
+.channel{
+min-height:140px;
+padding:16px;
+gap:12px;
 }
 
-.popup-btn {
-    display: block;
-    width: 100%;
-    padding: 11px;
-    margin-top: 9px;
-    border: 0;
-    border-radius: 6px;
-    background: #1688d8;
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
+.logo-box{
+width:105px;
+height:100px;
 }
 
-.footer {
-    text-align: center;
-    color: #59636d;
-    font-size: 11px;
-    margin-top: 32px;
+.channel-name{
+font-size:16px;
 }
 
-@media (max-width: 450px) {
-
-    .channel {
-        min-height: 92px;
-        padding: 9px;
-        gap: 9px;
-    }
-
-    .logo-box {
-        width: 70px;
-        height: 68px;
-        flex-basis: 70px;
-    }
-
-    .channel-name {
-        font-size: 14px;
-    }
-
-    .watch-btn {
-        padding: 8px 9px;
-        font-size: 10px;
-    }
+.watch-btn{
+padding:11px 13px;
+font-size:11px;
+}
 }
 </style>
 </head>
@@ -258,47 +213,50 @@ const_dummy {
 <body>
 
 <div class="topbar">
-    <div class="topbar-title" id="pageTitle"></div>
+<div class="topbar-title">CRICKET RASH</div>
 </div>
 
 <div class="page">
 
-    <!-- CHANNEL -->
-    <div class="channel" onclick="showPopup()">
+<div class="channel">
 
-        <div class="logo-box">
-            <img id="channelLogo" src="" alt="">
-        </div>
+<div class="logo-box">
+<img
+src="https://i.ibb.co/TD2HrLv5/IMG-20261026-200738-475.jpg"
+alt="CRICKET RASH">
+</div>
 
-        <div class="channel-info">
-            <div class="channel-name" id="channelName"></div>
-            <span class="live">LIVE</span>
-        </div>
+<div class="channel-info">
+<div class="channel-name">CRICKET RASH</div>
+<span class="live">LIVE</span>
+</div>
 
-        <button class="watch-btn"
-                onclick="event.stopPropagation(); showPlayer();">
-            WATCH
-        </button>
+<button class="watch-btn" id="watchButton">
+WATCH
+</button>
 
-    </div>
+</div>
 
-    <!-- PLAYER -->
-    <div class="player-container" id="playerContainer">
 
-        <div class="player">
-            <iframe
-                id="playerFrame"
-                src=""
-                allow="autoplay; fullscreen"
-                allowfullscreen>
-            </iframe>
-        </div>
+<div class="player-container" id="playerContainer">
 
-    </div>
+<div class="player">
 
-    <div class="footer">
-        Live Cricket
-    </div>
+<iframe
+id="playerFrame"
+src="https://crickcast-star1.pages.dev/?id=E2HD"
+allow="autoplay; fullscreen"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+Live Cricket
+</div>
 
 </div>
 
@@ -307,127 +265,70 @@ const_dummy {
 
 <div class="popup-bg" id="popupBg">
 
-    <div class="popup">
+<div class="popup">
 
-        <div class="close" onclick="closePopup()">×</div>
+<div class="close" id="closeButton">×</div>
 
-        <img
-            id="popupLogo"
-            class="popup-logo"
-            src=""
-            alt=""
-        >
+<img
+class="popup-logo"
+src="https://i.ibb.co/TD2HrLv5/IMG-20261026-200738-475.jpg"
+alt="CRICKET RASH">
 
-        <div
-            id="popupName"
-            class="popup-name">
-        </div>
+<div class="popup-name">
+CRICKET RASH
+</div>
 
-        <a
-            id="channelLink"
-            class="popup-btn"
-            href="#"
-            target="_blank"
-            rel="noopener">
-            OPEN CHANNEL
-        </a>
+<a
+class="popup-btn"
+href="https://t.me/cricket_raash"
+target="_blank"
+rel="noopener">
+OPEN CHANNEL
+</a>
 
-        <button
-            class="popup-btn"
-            onclick="closePopup(); showPlayer();">
-            WATCH LIVE
-        </button>
+<button
+class="popup-btn"
+id="watchLiveButton">
+WATCH LIVE
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <script>
 
-/* ==================================================
-   YAHAN SIRF 4 CHEEZE CHANGE KARNI HAIN
-   ================================================== */
+const popupBg = document.getElementById("popupBg");
+const watchButton = document.getElementById("watchButton");
+const watchLiveButton = document.getElementById("watchLiveButton");
+const closeButton = document.getElementById("closeButton");
+const playerContainer = document.getElementById("playerContainer");
 
-const CHANNEL_NAME = "CRICKET RASH";
+watchButton.addEventListener("click", function(){
+popupBg.style.display = "flex";
+});
 
-const LOGO_URL = "<a href="https://i.ibb.co/TD2HrLv5/IMG-20261026-200738-475.jpg";
+watchLiveButton.addEventListener("click", function(){
+popupBg.style.display = "none";
+playerContainer.style.display = "block";
 
-const CHANNEL_URL = "https://t.me/cricket_raash";
+setTimeout(function(){
+playerContainer.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+},100);
+});
 
-const PLAYER_URL = "https://crickcast-cricbuzz.pages.dev/?id=B0HMG5YWFC";
+closeButton.addEventListener("click", function(){
+popupBg.style.display = "none";
+});
 
-
-/* ==================================================
-   DON'T CHANGE BELOW
-   ================================================== */
-
-
-/* Page title */
-
-document.getElementById("pageTitle").textContent = CHANNEL_NAME;
-
-
-/* Channel */
-
-document.getElementById("channelName").textContent = CHANNEL_NAME;
-
-document.getElementById("channelLogo").src = LOGO_URL;
-
-
-/* Popup */
-
-document.getElementById("popupName").textContent = CHANNEL_NAME;
-
-document.getElementById("popupLogo").src = LOGO_URL;
-
-document.getElementById("channelLink").href = CHANNEL_URL;
-
-
-/* Player */
-
-document.getElementById("playerFrame").src = PLAYER_URL;
-
-
-/* Popup open */
-
-function showPopup() {
-    document.getElementById("popupBg").style.display = "flex";
+popupBg.addEventListener("click", function(event){
+if(event.target === popupBg){
+popupBg.style.display = "none";
 }
-
-
-/* Popup close */
-
-function closePopup() {
-    document.getElementById("popupBg").style.display = "none";
-}
-
-
-/* Player open */
-
-function showPlayer() {
-
-    const player = document.getElementById("playerContainer");
-
-    player.style.display = "block";
-
-    setTimeout(function() {
-        player.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }, 100);
-}
-
-
-/* Close popup by clicking outside */
-
-document.getElementById("popupBg").addEventListener("click", function(e) {
-
-    if (e.target === this) {
-        closePopup();
-    }
-
 });
 
 </script>

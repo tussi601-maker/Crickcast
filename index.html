@@ -96,8 +96,27 @@ font-weight:bold;
 cursor:pointer;
 }
 
-.watch-btn:active{
-transform:scale(.97);
+.player-container{
+display:none;
+width:100%;
+margin-top:20px;
+background:#000;
+border-radius:10px;
+overflow:hidden;
+border:1px solid #202b35;
+}
+
+.player{
+width:100%;
+aspect-ratio:16/9;
+background:#000;
+}
+
+.player video{
+width:100%;
+height:100%;
+display:block;
+background:#000;
 }
 
 .footer{
@@ -160,6 +179,25 @@ WATCH
 
 </div>
 
+
+<!-- HLS PLAYER -->
+
+<div class="player-container" id="playerContainer">
+
+<div class="player">
+
+<video
+id="videoPlayer"
+controls
+playsinline
+webkit-playsinline>
+</video>
+
+</div>
+
+</div>
+
+
 <div class="footer">
 Live Cricket
 </div>
@@ -167,13 +205,92 @@ Live Cricket
 </div>
 
 
+<!-- HLS.JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <script>
 
-document.getElementById("watchButton").addEventListener("click", function(){
+const STREAM_URL =
+"https://dai.google.com/ssai/event/_wNibTTjRKGbTJkQbT7_mQ/master.m3u8";
 
-window.location.href = "https://sonucdn-v5.pages.dev/star?id=STEN3";
+const watchButton =
+document.getElementById("watchButton");
+
+const playerContainer =
+document.getElementById("playerContainer");
+
+const video =
+document.getElementById("videoPlayer");
+
+let hls;
+
+
+/* WATCH BUTTON */
+
+watchButton.addEventListener("click", function(){
+
+playerContainer.style.display = "block";
+
+loadStream();
+
+setTimeout(function(){
+
+playerContainer.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+},100);
 
 });
+
+
+/* LOAD STREAM */
+
+function loadStream(){
+
+if(Hls.isSupported()){
+
+if(hls){
+hls.destroy();
+}
+
+hls = new Hls();
+
+hls.loadSource(STREAM_URL);
+
+hls.attachMedia(video);
+
+hls.on(Hls.Events.MANIFEST_PARSED,function(){
+
+video.play().catch(function(){
+
+});
+
+});
+
+}else if(
+video.canPlayType("application/vnd.apple.mpegurl")
+){
+
+video.src = STREAM_URL;
+
+video.addEventListener(
+"loadedmetadata",
+function(){
+
+video.play().catch(function(){
+
+});
+
+},
+{once:true}
+);
+
+}
+
+}
 
 </script>
 
